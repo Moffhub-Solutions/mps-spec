@@ -6,6 +6,9 @@ namespace Moffhub\MpsSpec\Data;
 
 final readonly class ConfigField
 {
+    /**
+     * @param  array<string>|null  $forCapabilities  Which capabilities require this field (null = always required)
+     */
     public function __construct(
         public string $key,
         public string $label,
@@ -14,7 +17,17 @@ final readonly class ConfigField
         public bool $secret = false,
         public ?string $description = null,
         public ?string $placeholder = null,
+        public ?array $forCapabilities = null,
     ) {}
+
+    public function isRequiredForCapabilities(array $enabledCapabilities): bool
+    {
+        if ($this->forCapabilities === null) {
+            return $this->required;
+        }
+
+        return !empty(array_intersect($this->forCapabilities, $enabledCapabilities));
+    }
 
     public function toArray(): array
     {
@@ -26,6 +39,7 @@ final readonly class ConfigField
             'secret' => $this->secret,
             'description' => $this->description,
             'placeholder' => $this->placeholder,
+            'for_capabilities' => $this->forCapabilities,
         ];
     }
 }
