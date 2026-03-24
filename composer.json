@@ -1,0 +1,15 @@
+{
+    "name": "moffhub/mps-spec",
+    "description": "Moffhub Payment Standard - Interfaces, DTOs, Enums, and Event Schemas",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Moffhub\\MpsSpec\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
