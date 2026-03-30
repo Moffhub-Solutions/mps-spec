@@ -16,6 +16,7 @@ final readonly class ConnectorManifest
      * @param  array<Capability>  $capabilities
      * @param  array<ConfigField>  $requiredConfig
      * @param  array<string>  $webhookEvents
+     * @param  array<FeeScheduleEntry>  $feeSchedule
      */
     public function __construct(
         public string $connectorId,
@@ -31,6 +32,9 @@ final readonly class ConnectorManifest
         public SettlementModel $settlementModel,
         public array $requiredConfig,
         public array $webhookEvents = [],
+        public ?int $settlementDelayHours = null,
+        public array $feeSchedule = [],
+        public bool $supportsProvisioning = false,
     ) {}
 
     public function toArray(): array
@@ -51,6 +55,9 @@ final readonly class ConnectorManifest
             'settlement_model' => $this->settlementModel->value,
             'required_config' => array_map(fn (ConfigField $f) => $f->toArray(), $this->requiredConfig),
             'webhook_events' => $this->webhookEvents,
+            'settlement_delay_hours' => $this->settlementDelayHours,
+            'fee_schedule' => array_map(fn (FeeScheduleEntry $f) => $f->toArray(), $this->feeSchedule),
+            'supports_provisioning' => $this->supportsProvisioning,
         ];
     }
 }
