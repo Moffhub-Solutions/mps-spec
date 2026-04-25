@@ -2,8 +2,16 @@
     "name": "moffhub/mps-spec",
     "description": "Moffhub Payment Standard - Interfaces, DTOs, Enums, and Event Schemas",
     "type": "library",
-    "license": "proprietary",
-    "version": "0.1.0",
+    "license": "MIT",
+    "keywords": ["payments", "mps", "moffhub", "connector", "specification"],
+    "homepage": "https://github.com/Moffhub-Solutions/mps-spec",
+    "support": {
+        "issues": "https://github.com/Moffhub-Solutions/mps-spec/issues",
+        "source": "https://github.com/Moffhub-Solutions/mps-spec"
+    },
+    "authors": [
+        { "name": "Moffhub", "homepage": "https://moffhub.com" }
+    ],
     "require": {
         "php": "^8.3"
     },
