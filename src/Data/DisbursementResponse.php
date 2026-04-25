@@ -6,6 +6,9 @@ namespace Moffhub\MpsSpec\Data;
 
 final readonly class DisbursementResponse
 {
+    /**
+     * @param  array<string, mixed>|null  $channelData
+     */
     public function __construct(
         public string $vendorRef,
         public string $status,
@@ -15,6 +18,9 @@ final readonly class DisbursementResponse
         public ?string $failureReason = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

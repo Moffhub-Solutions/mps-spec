@@ -15,6 +15,9 @@ final readonly class ProvisionResponse
         public ?string $displayInstructions = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

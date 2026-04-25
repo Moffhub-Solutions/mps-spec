@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 final class MpsSpecTest extends TestCase
 {
-    public function test_connector_type_enum_has_all_cases(): void
+    public function testConnectorTypeEnumHasAllCases(): void
     {
         $cases = ConnectorType::cases();
 
@@ -26,14 +26,14 @@ final class MpsSpecTest extends TestCase
         $this->assertSame('settlement', ConnectorType::Settlement->value);
     }
 
-    public function test_connector_type_enum_labels(): void
+    public function testConnectorTypeEnumLabels(): void
     {
         $this->assertSame('Payment Connector', ConnectorType::Payment->label());
         $this->assertSame('Service Connector', ConnectorType::Service->label());
         $this->assertSame('Settlement Connector', ConnectorType::Settlement->label());
     }
 
-    public function test_capability_enum_has_all_cases_including_provisioning(): void
+    public function testCapabilityEnumHasAllCasesIncludingProvisioning(): void
     {
         $cases = Capability::cases();
 
@@ -42,7 +42,7 @@ final class MpsSpecTest extends TestCase
         $this->assertSame('Merchant Provisioning', Capability::Provisioning->label());
     }
 
-    public function test_capability_enum_has_existing_cases(): void
+    public function testCapabilityEnumHasExistingCases(): void
     {
         $this->assertSame('payment', Capability::Payment->value);
         $this->assertSame('refund', Capability::Refund->value);
@@ -52,7 +52,7 @@ final class MpsSpecTest extends TestCase
         $this->assertSame('webhook', Capability::Webhook->value);
     }
 
-    public function test_connector_manifest_with_new_fields(): void
+    public function testConnectorManifestWithNewFields(): void
     {
         $feeEntry = new FeeScheduleEntry(
             channel: 'stk_push',
@@ -84,7 +84,7 @@ final class MpsSpecTest extends TestCase
         $this->assertTrue($manifest->supportsProvisioning);
     }
 
-    public function test_connector_manifest_to_array_includes_new_fields(): void
+    public function testConnectorManifestToArrayIncludesNewFields(): void
     {
         $feeEntry = new FeeScheduleEntry(
             channel: 'card',
@@ -116,12 +116,14 @@ final class MpsSpecTest extends TestCase
 
         $this->assertSame(48, $array['settlement_delay_hours']);
         $this->assertFalse($array['supports_provisioning']);
+        $this->assertIsArray($array['fee_schedule']);
         $this->assertCount(1, $array['fee_schedule']);
+        $this->assertIsArray($array['fee_schedule'][0]);
         $this->assertSame('card', $array['fee_schedule'][0]['channel']);
         $this->assertSame('percentage_plus_flat', $array['fee_schedule'][0]['fee_type']);
     }
 
-    public function test_connector_manifest_new_fields_default_values(): void
+    public function testConnectorManifestNewFieldsDefaultValues(): void
     {
         $manifest = new ConnectorManifest(
             connectorId: 'test',
@@ -148,7 +150,7 @@ final class MpsSpecTest extends TestCase
         $this->assertFalse($array['supports_provisioning']);
     }
 
-    public function test_provision_request_construction(): void
+    public function testProvisionRequestConstruction(): void
     {
         $request = new ProvisionRequest(
             merchantId: 'merch-001',
@@ -167,7 +169,7 @@ final class MpsSpecTest extends TestCase
         $this->assertSame(['tier' => 'premium'], $request->metadata);
     }
 
-    public function test_provision_request_optional_fields_default_to_null(): void
+    public function testProvisionRequestOptionalFieldsDefaultToNull(): void
     {
         $request = new ProvisionRequest(
             merchantId: 'merch-002',
@@ -180,7 +182,7 @@ final class MpsSpecTest extends TestCase
         $this->assertSame([], $request->metadata);
     }
 
-    public function test_provision_response_construction_and_to_array(): void
+    public function testProvisionResponseConstructionAndToArray(): void
     {
         $response = new ProvisionResponse(
             merchantRef: 'VENDOR-REF-123',
@@ -202,7 +204,7 @@ final class MpsSpecTest extends TestCase
         $this->assertSame('Pay to Paybill 123456, Account MERCH-0042', $array['display_instructions']);
     }
 
-    public function test_provision_response_optional_display_instructions(): void
+    public function testProvisionResponseOptionalDisplayInstructions(): void
     {
         $response = new ProvisionResponse(
             merchantRef: 'REF-456',
@@ -213,7 +215,7 @@ final class MpsSpecTest extends TestCase
         $this->assertNull($response->toArray()['display_instructions']);
     }
 
-    public function test_fee_schedule_entry_construction_and_to_array(): void
+    public function testFeeScheduleEntryConstructionAndToArray(): void
     {
         $entry = new FeeScheduleEntry(
             channel: 'stk_push',
@@ -238,7 +240,7 @@ final class MpsSpecTest extends TestCase
         $this->assertSame(200000, $array['fee_cap']);
     }
 
-    public function test_fee_schedule_entry_default_values(): void
+    public function testFeeScheduleEntryDefaultValues(): void
     {
         $entry = new FeeScheduleEntry(
             channel: 'card',
@@ -250,7 +252,7 @@ final class MpsSpecTest extends TestCase
         $this->assertNull($entry->feeCap);
     }
 
-    public function test_fee_schedule_entry_percentage_plus_flat(): void
+    public function testFeeScheduleEntryPercentagePlusFlat(): void
     {
         $entry = new FeeScheduleEntry(
             channel: 'bank_transfer',

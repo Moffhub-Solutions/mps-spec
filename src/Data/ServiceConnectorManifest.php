@@ -10,11 +10,12 @@ final readonly class ServiceConnectorManifest
 {
     /**
      * @param  array<string>  $supportedServices
+     * @param  array<string>  $supportedCurrencies
      * @param  array<ConfigField>  $requiredConfig
      * @param  PaymentModel  $paymentModel  How this vendor handles payments:
-     *   - VendorManaged: Vendor collects payments (has own M-Pesa/Paystack). Merchant just provides vendor API key.
-     *   - MerchantManaged: Vendor handles logic only. Merchant must set up their own payment connector (M-Pesa/Paystack).
-     *   - Either: Vendor CAN collect, but merchant can CHOOSE to use their own payment rails instead.
+     *                                      - VendorManaged: Vendor collects payments (has own M-Pesa/Paystack). Merchant just provides vendor API key.
+     *                                      - MerchantManaged: Vendor handles logic only. Merchant must set up their own payment connector (M-Pesa/Paystack).
+     *                                      - Either: Vendor CAN collect, but merchant can CHOOSE to use their own payment rails instead.
      */
     public function __construct(
         public string $connectorId,
@@ -35,6 +36,9 @@ final readonly class ServiceConnectorManifest
         public ?string $dashboardUrl = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
@@ -51,7 +55,7 @@ final readonly class ServiceConnectorManifest
             'description' => $this->description,
             'supported_services' => $this->supportedServices,
             'supported_currencies' => $this->supportedCurrencies,
-            'required_config' => array_map(fn (ConfigField $f) => $f->toArray(), $this->requiredConfig),
+            'required_config' => array_map(fn(ConfigField $f) => $f->toArray(), $this->requiredConfig),
             'payment_model' => $this->paymentModel->value,
             'commission_model' => $this->commissionModel,
             'default_commission_amount' => $this->defaultCommissionAmount,

@@ -18,6 +18,9 @@ final readonly class ChargeResponse
         public ?int $estimatedCompletionSeconds = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

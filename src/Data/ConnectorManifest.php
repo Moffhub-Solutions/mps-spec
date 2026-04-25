@@ -37,6 +37,9 @@ final readonly class ConnectorManifest
         public bool $supportsProvisioning = false,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
@@ -49,14 +52,14 @@ final readonly class ConnectorManifest
                 'website' => $this->vendorWebsite,
                 'support_email' => $this->vendorSupportEmail,
             ],
-            'supported_channels' => array_map(fn (Channel $c) => $c->value, $this->supportedChannels),
+            'supported_channels' => array_map(fn(Channel $c) => $c->value, $this->supportedChannels),
             'supported_currencies' => $this->supportedCurrencies,
-            'capabilities' => array_map(fn (Capability $c) => $c->value, $this->capabilities),
+            'capabilities' => array_map(fn(Capability $c) => $c->value, $this->capabilities),
             'settlement_model' => $this->settlementModel->value,
-            'required_config' => array_map(fn (ConfigField $f) => $f->toArray(), $this->requiredConfig),
+            'required_config' => array_map(fn(ConfigField $f) => $f->toArray(), $this->requiredConfig),
             'webhook_events' => $this->webhookEvents,
             'settlement_delay_hours' => $this->settlementDelayHours,
-            'fee_schedule' => array_map(fn (FeeScheduleEntry $f) => $f->toArray(), $this->feeSchedule),
+            'fee_schedule' => array_map(fn(FeeScheduleEntry $f) => $f->toArray(), $this->feeSchedule),
             'supports_provisioning' => $this->supportsProvisioning,
         ];
     }

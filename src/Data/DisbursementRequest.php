@@ -6,6 +6,9 @@ namespace Moffhub\MpsSpec\Data;
 
 final readonly class DisbursementRequest
 {
+    /**
+     * @param  array<string, mixed>  $metadata
+     */
     public function __construct(
         public string $referenceId,
         public MoneyAmount $amount,
@@ -15,6 +18,9 @@ final readonly class DisbursementRequest
         public array $metadata = [],
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

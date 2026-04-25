@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Moffhub\MpsSpec\Data;
 
 final readonly class PaymentConfirmation
@@ -13,6 +15,9 @@ final readonly class PaymentConfirmation
         public ?string $payerIdentifier = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

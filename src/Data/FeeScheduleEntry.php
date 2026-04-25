@@ -14,6 +14,9 @@ final readonly class FeeScheduleEntry
         public ?int $feeCap = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

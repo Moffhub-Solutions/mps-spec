@@ -18,6 +18,9 @@ final readonly class SettlementReport
         public array $transactions,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
@@ -26,7 +29,7 @@ final readonly class SettlementReport
             'total_amount' => $this->totalAmount->toArray(),
             'total_fees' => $this->totalFees->toArray(),
             'net_amount' => $this->netAmount->toArray(),
-            'transactions' => array_map(fn (SettlementTransaction $t) => $t->toArray(), $this->transactions),
+            'transactions' => array_map(fn(SettlementTransaction $t) => $t->toArray(), $this->transactions),
         ];
     }
 }

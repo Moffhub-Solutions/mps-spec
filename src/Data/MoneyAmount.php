@@ -11,6 +11,9 @@ final readonly class MoneyAmount
         public string $currency,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

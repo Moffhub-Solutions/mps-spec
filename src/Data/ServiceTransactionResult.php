@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Moffhub\MpsSpec\Data;
 
 /**
@@ -12,6 +14,9 @@ namespace Moffhub\MpsSpec\Data;
  */
 final readonly class ServiceTransactionResult
 {
+    /**
+     * @param  array<string, mixed>  $serviceData
+     */
     public function __construct(
         public string $vendorRef,
         public string $status,
@@ -34,6 +39,9 @@ final readonly class ServiceTransactionResult
         return $this->paymentHandled;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

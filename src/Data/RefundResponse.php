@@ -13,6 +13,9 @@ final readonly class RefundResponse
         public ?string $failureReason = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

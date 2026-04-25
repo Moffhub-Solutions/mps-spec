@@ -1,9 +1,14 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Moffhub\MpsSpec\Data;
 
 final readonly class ServiceTransaction
 {
+    /**
+     * @param  array<string, mixed>  $metadata
+     */
     public function __construct(
         public string $intentId,
         public string $serviceCode,
@@ -13,6 +18,9 @@ final readonly class ServiceTransaction
         public array $metadata = [],
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

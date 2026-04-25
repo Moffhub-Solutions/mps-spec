@@ -20,6 +20,9 @@ final readonly class ConfigField
         public ?array $forCapabilities = null,
     ) {}
 
+    /**
+     * @param  array<string>  $enabledCapabilities
+     */
     public function isRequiredForCapabilities(array $enabledCapabilities): bool
     {
         if ($this->forCapabilities === null) {
@@ -29,6 +32,9 @@ final readonly class ConfigField
         return !empty(array_intersect($this->forCapabilities, $enabledCapabilities));
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

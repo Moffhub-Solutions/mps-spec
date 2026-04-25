@@ -14,6 +14,9 @@ final readonly class SettlementTransaction
         public string $settledAt,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

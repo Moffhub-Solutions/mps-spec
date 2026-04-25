@@ -11,6 +11,9 @@ final readonly class DateRange
         public string $end,
     ) {}
 
+    /**
+     * @return array<string, string>
+     */
     public function toArray(): array
     {
         return [

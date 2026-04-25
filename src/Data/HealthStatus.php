@@ -17,6 +17,9 @@ final readonly class HealthStatus
         return $this->status === 'healthy';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

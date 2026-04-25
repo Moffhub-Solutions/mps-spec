@@ -11,6 +11,9 @@ interface ConnectorInterface
 {
     public function manifest(): ConnectorManifest;
 
+    /**
+     * @param  array<string, mixed>  $config
+     */
     public function initialize(array $config): void;
 
     public function healthCheck(): HealthStatus;

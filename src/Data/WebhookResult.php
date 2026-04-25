@@ -17,6 +17,9 @@ final readonly class WebhookResult
         public mixed $rawPayload = null,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [

@@ -21,6 +21,9 @@ final readonly class ChargeRequest
         public array $metadata = [],
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
