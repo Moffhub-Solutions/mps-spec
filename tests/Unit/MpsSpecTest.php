@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Moffhub\MpsSpec\Tests;
+namespace Moffhub\MpsSpec\Tests\Unit;
 
 use Moffhub\MpsSpec\Data\ConnectorManifest;
 use Moffhub\MpsSpec\Data\FeeScheduleEntry;

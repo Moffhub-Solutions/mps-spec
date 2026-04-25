@@ -1,19 +1,45 @@
 {
     "name": "moffhub/mps-spec",
-    "description": "Moffhub Payment Standard - Interfaces, DTOs, Enums, and Event Schemas",
+    "description": "Moffhub Payment Standard - Interfaces, DTOs, Enums, and Event Schemas for building payment connectors.",
     "type": "library",
     "license": "MIT",
-    "keywords": ["payments", "mps", "moffhub", "connector", "specification"],
+    "keywords": [
+        "payments",
+        "mps",
+        "moffhub",
+        "connector",
+        "specification",
+        "payment-standard",
+        "africa",
+        "kenya"
+    ],
     "homepage": "https://github.com/Moffhub-Solutions/mps-spec",
     "support": {
         "issues": "https://github.com/Moffhub-Solutions/mps-spec/issues",
         "source": "https://github.com/Moffhub-Solutions/mps-spec"
     },
     "authors": [
-        { "name": "Moffhub", "homepage": "https://moffhub.com" }
+        {
+            "name": "Moffat Munene",
+            "email": "moffmu@gmail.com"
+        }
+    ],
+    "contributors": [
+        {
+            "name": "Moffat Munene",
+            "email": "moffmu@gmail.com",
+            "homepage": "https://github.com/MOFFROUGH",
+            "role": "Maintainer"
+        }
     ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.4|^8.5"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.27",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^11.5|^12.5",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -25,8 +51,34 @@
             "Moffhub\\MpsSpec\\Tests\\": "tests/"
         }
     },
-    "require-dev": {
-        "phpunit/phpunit": "^11.0"
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
     },
-    "minimum-stability": "stable"
+    "scripts": {
+        "check-code": [
+            "@lint",
+            "@phpstan",
+            "@test"
+        ],
+        "lint": [
+            "vendor/bin/pint --test"
+        ],
+        "lint:fix": [
+            "vendor/bin/pint"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan --memory-limit=512M"
+        ],
+        "rector": [
+            "vendor/bin/rector process --dry-run"
+        ],
+        "rector:fix": [
+            "vendor/bin/rector process"
+        ],
+        "test": [
+            "vendor/bin/phpunit"
+        ]
+    }
 }
