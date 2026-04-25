@@ -3,6 +3,7 @@
     "description": "Moffhub Payment Standard - Interfaces, DTOs, Enums, and Event Schemas",
     "type": "library",
     "license": "proprietary",
+    "version": "0.1.0",
     "require": {
         "php": "^8.3"
     },
