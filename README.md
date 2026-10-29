@@ -14,7 +14,7 @@ Requires PHP 8.3+.
 
 ## What's in the box
 
-- **Contracts** (`Moffhub\MpsSpec\Contracts\`) — `ConnectorInterface`, `ServiceConnectorInterface`, plus capability mixins (`HasChargeCapability`, `HasRefundCapability`, `HasSettlementCapability`, `HasDisbursementCapability`, `HasWebhookCapability`, `HasProvisioningCapability`).
+- **Contracts** (`Moffhub\MpsSpec\Contracts\`) — `ConnectorInterface`, `ServiceConnectorInterface`, plus capability mixins (`HasChargeCapability`, `HasRefundCapability`, `HasSettlementCapability`, `HasDisbursementCapability`, `HasWebhookCapability`, `HasProvisioningCapability`, `HasVerificationCapability`, `HasWebhookRegistration`).
 - **Data** (`Moffhub\MpsSpec\Data\`) — Immutable `final readonly` DTOs: `ChargeRequest`, `ChargeResponse`, `ConnectorManifest`, `MoneyAmount`, `SettlementReport`, etc.
 - **Enums** (`Moffhub\MpsSpec\Enums\`) — Backed string enums: `Capability`, `Channel`, `ChargeStatus`, `Currency`, `ConnectorType`, `SettlementModel`, etc.
 - **Exceptions** (`Moffhub\MpsSpec\Exceptions\`) — Domain exceptions like `ChargeFailedException`, `WebhookVerificationFailedException`.
@@ -91,6 +91,11 @@ A connector advertises capabilities by listing them in the manifest **and** impl
 | `Disbursement` | `HasDisbursementCapability` | `disburse` |
 | `Webhook` | `HasWebhookCapability` | `handleWebhook` |
 | `Provisioning` | `HasProvisioningCapability` | `provision` |
+| `Verification` | `HasVerificationCapability` | `verify` |
+
+`verify(string $reference)` asks the provider whether a charge or receipt really happened and returns a `VerificationResult`. It is a read and safe to repeat. A provider that answers on the spot returns `answered: true` with a Completed or Failed status; one that only accepts the question and answers later by callback returns `answered: false` and Pending, which a caller must not read as a verdict.
+
+`HasWebhookRegistration` is not a capability of its own. A connector whose provider only sends callbacks to addresses registered with it (a paybill's C2B confirmation and validation URLs) also implements `registerWebhooks(string $confirmationUrl, string $validationUrl): string`.
 
 The platform discovers a connector's capabilities by `instanceof` checks against these interfaces, so the manifest and the implementation must agree.
 

@@ -13,6 +13,7 @@ enum Capability: string
     case Disbursement = 'disbursement';
     case Webhook = 'webhook';
     case Provisioning = 'provisioning';
+    case Verification = 'verification';
 
     public function label(): string
     {
@@ -24,6 +25,7 @@ enum Capability: string
             self::Disbursement => 'Disbursement / Payout',
             self::Webhook => 'Webhook Handling',
             self::Provisioning => 'Merchant Provisioning',
+            self::Verification => 'Payment Verification',
         };
     }
 }

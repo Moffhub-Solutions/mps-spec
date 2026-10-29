@@ -37,9 +37,11 @@ final class MpsSpecTest extends TestCase
     {
         $cases = Capability::cases();
 
-        $this->assertCount(7, $cases);
+        $this->assertCount(8, $cases);
         $this->assertSame('provisioning', Capability::Provisioning->value);
         $this->assertSame('Merchant Provisioning', Capability::Provisioning->label());
+        $this->assertSame('verification', Capability::Verification->value);
+        $this->assertSame('Payment Verification', Capability::Verification->label());
     }
 
     public function testCapabilityEnumHasExistingCases(): void
